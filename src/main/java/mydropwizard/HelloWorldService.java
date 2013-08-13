@@ -3,6 +3,7 @@ package mydropwizard;
 import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
+import mydropwizard.health.TemplateHealthCheck;
 import mydropwizard.resources.HelloWorldResource;
 
 public class HelloWorldService extends Service<HelloWorldConfiguration> {
@@ -23,5 +24,6 @@ public class HelloWorldService extends Service<HelloWorldConfiguration> {
         final String defaultName = configuration.getDefaultName();
 
         environment.addResource(new HelloWorldResource(template, defaultName));
+        environment.addHealthCheck(new TemplateHealthCheck(template));
     }
 }
